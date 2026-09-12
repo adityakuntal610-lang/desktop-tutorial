@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>EduTech AI | Learn the Future</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            space: '#0b0f19',
+            cyan: '#00f2fe',
+            electric: '#4facfe',
+            violet: '#8b5cf6'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0b0f19;
+      overflow-x: hidden;
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(79,172,254,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,172,254,.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.045);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #00f2fe, #4facfe, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gradient-border {
+      position: relative;
+    }
+
+    .gradient-border::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #00f2fe, transparent, #8b5cf6);
+      opacity: .55;
+    }
+
+    .glow {
+      box-shadow: 0 0 40px rgba(0,242,254,.12);
+    }
+
+    .course-card {
+      transition: all .35s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0,242,254,.4);
+      box-shadow: 0 25px 70px rgba(0,0,0,.4);
+    }
+
+    .btn-glow {
+      box-shadow: 0 10px 35px rgba(79,172,254,.22);
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 45px rgba(0,242,254,.3);
+    }
+
+    .floating {
+      animation: floating 5s ease-in-out infinite;
+    }
+
+    .floating-delay {
+      animation: floating 6s ease-in-out infinite 1s;
+    }
+
+    @keyframes floating {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .blob {
+      filter: blur(100px);
+      opacity: .2;
+      pointer-events: none;
+    }
+
+    .modal {
+      display: none;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .fade-up {
+      animation: fadeUp .6s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .toast {
+      transform: translateY(150%);
+      transition: .4s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+
+    .progress-ring {
+      transform: rotate(-90deg);
+    }
+
+    .nav-mobile {
+      display: none;
+    }
+
+    @media(max-width:768px) {
+      .nav-desktop {
+        display: none;
+      }
+
+      .nav-mobile.active {
+        display: flex;
+      }
+    }
+  </style>
+
+</head>
+
+<body class="text-white font-sans">
+
+  <div class="fixed inset-0 -z-10 grid-bg"></div>
+
+  <div class="blob fixed w-96 h-96 bg-cyan rounded-full -top-40 -left-40"></div>
+  <div class="blob fixed w-96 h-96 bg-violet rounded-full top-1/3 -right-40"></div>
+
+  <!-- NAVBAR -->
+
+  <header class="fixed top-0 left-0 right-0 z-40">
+    <nav class="glass max-w-7xl mx-auto mt-4 rounded-2xl px-5 py-4 flex items-center justify-between">
+
+```
+  <a href="#home" class="flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan to-violet flex items-center justify-center shadow-lg">
+      <i data-lucide="graduation-cap" class="w-5 h-5 text-black"></i>
+    </div>
+
+    <div>
+      <h1 class="font-heading font-extrabold text-lg">
+        EduTech <span class="gradient-text">AI</span>
+      </h1>
+    </div>
+  </a>
+
+  <div class="nav-desktop flex items-center gap-7 text-sm text-slate-300">
+    <a href="#home" class="hover:text-cyan transition">Home</a>
+    <a href="#courses" class="hover:text-cyan transition">Courses</a>
+    <a href="#learning" class="hover:text-cyan transition">My Learning</a>
+    <a href="#pricing" class="hover:text-cyan transition">Pricing</a>
+    <a href="#about" class="hover:text-cyan transition">About Us</a>
+  </div>
+
+  <div class="nav-desktop flex items-center gap-3">
+
+    <div class="relative">
+      <i data-lucide="search" class="absolute left-3 top-3 w-4 h-4 text-slate-500"></i>
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search courses..."
+        class="w-44 bg-white/5 border border-white/10 rounded-xl py-2.5 pl-9 pr-3 text-sm outline-none focus:border-cyan/60"
+      >
+    </div>
+
+    <button id="loginBtn" class="px-4 py-2 text-sm hover:text-cyan">
+      Log In
+    </button>
+
+    <button id="startBtn" class="btn-glow px-5 py-2.5 rounded-xl text-sm font-bold text-black bg-gradient-to-r from-cyan to-electric">
+      Get Started Free
+    </button>
+
+    <div id="profileArea" class="hidden relative">
+
+      <button id="profileBtn" class="w-10 h-10 rounded-full bg-gradient-to-br from-violet to-cyan text-black font-bold">
+        U
+      </button>
+
+      <div id="profileMenu" class="hidden absolute right-0 mt-3 w-48 glass rounded-xl overflow-hidden">
+        <button class="w-full text-left px-4 py-3 hover:bg-white/5">Profile</button>
+        <button onclick="document.querySelector('#learning').scrollIntoView()" class="w-full text-left px-4 py-3 hover:bg-white/5">My Learning</button>
+        <button class="w-full text-left px-4 py-3 hover:bg-white/5">Settings</button>
+        <button id="logoutBtn" class="w-full text-left px-4 py-3 text-red-400 hover:bg-white/5">Logout</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <button id="mobileMenuBtn" class="md:hidden">
+    <i data-lucide="menu"></i>
+  </button>
+
+</nav>
+
+<div id="mobileNav" class="nav-mobile flex-col gap-4 glass m-4 mt-2 p-5 rounded-2xl">
+  <a href="#home">Home</a>
+  <a href="#courses">Courses</a>
+  <a href="#learning">My Learning</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#about">About Us</a>
+  <button id="mobileLoginBtn" class="text-left text-cyan">Log In</button>
+</div>
+```
+
+  </header>
+
+  <main>
+
+```
+<!-- HERO -->
+<section id="home" class="min-h-screen flex items-center pt-28">
+
+  <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center">
+
+    <div>
+
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs text-cyan mb-7">
+        <span class="w-2 h-2 rounded-full bg-cyan animate-pulse"></span>
+        NEXT-GENERATION AI LEARNING
+      </div>
+
+      <h2 class="font-heading text-5xl md:text-7xl font-extrabold leading-tight">
+        Master
+        <span class="gradient-text"> In-Demand Tech Skills</span>
+        with AI-Powered Learning.
+      </h2>
+
+      <p class="text-slate-400 text-lg mt-7 max-w-xl leading-relaxed">
+        Learn from industry experts, follow personalized learning paths,
+        build real projects and accelerate your career with intelligent AI-powered guidance.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mt-9">
+
+        <a href="#courses" class="btn-glow px-7 py-4 rounded-xl bg-gradient-to-r from-cyan to-electric text-black font-bold">
+          Explore Courses
+          <i data-lucide="arrow-right" class="inline w-4 ml-2"></i>
+        </a>
+
+        <button id="trialBtn" class="glass px-7 py-4 rounded-xl font-semibold hover:border-cyan/40">
+          Start Free Trial
+        </button>
+
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 mt-12">
+
+        <div class="glass rounded-xl p-4">
+          <h3 class="font-bold text-xl gradient-text">50K+</h3>
+          <p class="text-xs text-slate-400 mt-1">Students</p>
+        </div>
+
+        <div class="glass rounded-xl p-4">
+          <h3 class="font-bold text-xl gradient-text">4.9/5</h3>
+          <p class="text-xs text-slate-400 mt-1">Rating</p>
+        </div>
+
+        <div class="glass rounded-xl p-4">
+          <h3 class="font-bold text-xl gradient-text">100+</h3>
+          <p class="text-xs text-slate-400 mt-1">Courses</p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- HERO DASHBOARD -->
+    <div class="relative">
+
+      <div class="glass gradient-border glow rounded-3xl p-6 floating">
+
+        <div class="flex justify-between items-center mb-6">
+
+          <div>
+            <p class="text-xs text-slate-500">WELCOME BACK</p>
+            <h3 class="text-xl font-bold mt-1">Future Builder 👋</h3>
+          </div>
+
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-cyan to-violet"></div>
+
+        </div>
+
+        <div class="bg-white/5 rounded-2xl p-5 border border-white/5">
+
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-400">Learning Progress</span>
+            <span class="text-cyan">72%</span>
+          </div>
+
+          <div class="h-2 bg-white/10 rounded-full mt-4 overflow-hidden">
+            <div class="h-full w-[72%] bg-gradient-to-r from-cyan to-violet rounded-full"></div>
+          </div>
+
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mt-5">
+
+          <div class="bg-white/5 p-5 rounded-2xl">
+            <i data-lucide="brain-circuit" class="text-cyan mb-3"></i>
+            <p class="text-xs text-slate-400">AI Tutor</p>
+            <h4 class="font-bold mt-1">Always Ready</h4>
+          </div>
+
+          <div class="bg-white/5 p-5 rounded-2xl">
+            <i data-lucide="flame" class="text-orange-400 mb-3"></i>
+            <p class="text-xs text-slate-400">Study Streak</p>
+            <h4 class="font-bold mt-1">7 Days 🔥</h4>
+          </div>
+
+        </div>
+
+        <div class="mt-5 bg-gradient-to-r from-violet/20 to-cyan/10 border border-white/10 rounded-2xl p-5">
+          <p class="text-xs text-slate-400">CURRENT SKILL</p>
+          <div class="flex justify-between mt-2">
+            <span class="font-semibold">Full Stack Development</span>
+            <span class="text-cyan">Level 7</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="absolute -right-5 top-16 glass rounded-xl px-4 py-3 floating-delay">
+        <p class="text-xs text-slate-400">AI SCORE</p>
+        <p class="text-xl font-bold text-cyan">94%</p>
+      </div>
+
+      <div class="absolute -left-7 bottom-12 glass rounded-xl px-4 py-3 floating">
+        🤖 AI Tutor Online
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- COURSES -->
+<section id="courses" class="py-28">
+
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center max-w-2xl mx-auto">
+
+      <p class="text-cyan text-xs tracking-[.25em]">EXPLORE THE FUTURE</p>
+
+      <h2 class="font-heading text-4xl md:text-5xl font-extrabold mt-4">
+        Explore Our <span class="gradient-text">Popular Courses</span>
+      </h2>
+
+      <p class="text-slate-400 mt-5">
+        Learn the skills shaping the future with expert-designed learning paths.
+      </p>
+
+    </div>
+
+
+    <!-- FILTERS -->
+    <div id="filters" class="flex flex-wrap justify-center gap-3 mt-10">
+
+      <button data-filter="All" class="filter-btn px-5 py-2 rounded-full bg-cyan text-black font-bold text-sm">All</button>
+
+      <button data-filter="Web Development" class="filter-btn glass px-5 py-2 rounded-full text-sm">Web Development</button>
+
+      <button data-filter="Data Science" class="filter-btn glass px-5 py-2 rounded-full text-sm">Data Science</button>
+
+      <button data-filter="AI / ML" class="filter-btn glass px-5 py-2 rounded-full text-sm">AI / ML</button>
+
+      <button data-filter="Cyber Security" class="filter-btn glass px-5 py-2 rounded-full text-sm">Cyber Security</button>
+
+      <button data-filter="Design" class="filter-btn glass px-5 py-2 rounded-full text-sm">Design</button>
+
+    </div>
+
+
+    <div id="courseGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"></div>
+
+  </div>
+
+</section>
+
+
+<!-- MY LEARNING -->
+<section id="learning" class="py-28">
+
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-5">
+
+      <div>
+        <p class="text-cyan text-xs tracking-[.25em]">MY LEARNING</p>
+
+        <h2 class="font-heading text-4xl font-extrabold mt-4">
+          Welcome back, <span id="learnerName" class="gradient-text">Learner</span> 👋
+        </h2>
+      </div>
+
+      <p class="text-slate-400">Continue building your future today.</p>
+
+    </div>
+
+
+    <div class="grid lg:grid-cols-3 gap-6 mt-10">
+
+      <div class="lg:col-span-2 glass rounded-3xl p-7">
+
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-xl">Active Courses</h3>
+          <span class="text-cyan text-sm">Your Progress</span>
+        </div>
+
+        <div id="activeCourses" class="mt-6 space-y-4"></div>
+
+      </div>
+
+
+      <div class="space-y-6">
+
+        <div class="glass rounded-3xl p-7">
+          <p class="text-slate-400 text-sm">STUDY STREAK</p>
+          <h3 class="text-4xl font-bold mt-3">7 Days 🔥</h3>
+          <p class="text-slate-500 text-sm mt-2">Keep the momentum alive!</p>
+        </div>
+
+        <div class="glass rounded-3xl p-7">
+          <p class="text-slate-400 text-sm">CURRENT XP</p>
+          <h3 class="text-4xl font-bold mt-3 gradient-text">2,480 XP</h3>
+          <p class="text-slate-500 text-sm mt-2">Level 7 Learner</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- AI ASSISTANT -->
+<section class="py-28">
+
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
+
+    <div>
+
+      <p class="text-cyan text-xs tracking-[.25em]">POWERED BY AI</p>
+
+      <h2 class="font-heading text-5xl font-extrabold mt-4">
+        Your Personal <span class="gradient-text">AI Learning Assistant</span>
+      </h2>
+
+      <p class="text-slate-400 mt-6 leading-relaxed">
+        Ask questions, understand difficult topics and get instant explanations while learning.
+      </p>
+
+      <div class="grid grid-cols-2 gap-4 mt-8">
+
+        <div class="glass p-5 rounded-2xl">
+          <i data-lucide="zap" class="text-cyan"></i>
+          <p class="font-semibold mt-3">Instant Answers</p>
+        </div>
+
+        <div class="glass p-5 rounded-2xl">
+          <i data-lucide="route" class="text-violet"></i>
+          <p class="font-semibold mt-3">Smart Learning Paths</p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="glass rounded-3xl p-5">
+
+      <div class="flex items-center gap-3 border-b border-white/10 pb-4">
+
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan to-violet flex items-center justify-center">
+          <i data-lucide="bot" class="text-black"></i>
+        </div>
+
+        <div>
+          <h3 class="font-bold">EduTech AI</h3>
+          <p class="text-xs text-cyan">Online • Ready to help</p>
+        </div>
+
+      </div>
+
+
+      <div id="chatMessages" class="h-72 overflow-y-auto py-5 space-y-4">
+
+        <div class="max-w-[85%] bg-white/5 p-4 rounded-2xl text-sm text-slate-300">
+          Hi! 👋 Ask me anything about programming, AI, technology or your course.
+        </div>
+
+      </div>
+
+
+      <form id="chatForm" class="flex gap-3 border-t border-white/10 pt-4">
+
+        <input
+          id="chatInput"
+          class="flex-1 bg-white/5 rounded-xl px-4 py-3 outline-none border border-white/10 focus:border-cyan"
+          placeholder="Ask EduTech AI..."
+        >
+
+        <button class="w-12 rounded-xl bg-gradient-to-r from-cyan to-electric text-black flex items-center justify-center">
+          <i data-lucide="send"></i>
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PRICING -->
+<section id="pricing" class="py-28">
+
+  <div class="max-w-7xl mx-auto px-6 text-center">
+
+    <p class="text-cyan text-xs tracking-[.25em]">SIMPLE PRICING</p>
+
+    <h2 class="font-heading text-5xl font-extrabold mt-4">
+      Invest In <span class="gradient-text">Your Future</span>
+    </h2>
+
+
+    <div class="grid md:grid-cols-3 gap-6 mt-14 text-left">
+
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-2xl font-bold">Free</h3>
+        <p class="text-slate-400 mt-2">Start your journey.</p>
+        <p class="text-4xl font-bold mt-7">₹0<span class="text-sm text-slate-500"> / month</span></p>
+
+        <ul class="space-y-4 mt-8 text-slate-300">
+          <li>✓ Access to Free Courses</li>
+          <li>✓ Basic AI Assistant</li>
+          <li>✓ Community Access</li>
+        </ul>
+
+        <button onclick="selectPlan('Free')" class="w-full glass rounded-xl py-3 mt-8">
+          Start Free
+        </button>
+      </div>
+
+
+      <div class="relative rounded-3xl p-[1px] bg-gradient-to-br from-cyan to-violet">
+
+        <div class="bg-[#0b0f19] rounded-3xl p-8 h-full">
+
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan to-violet text-black text-xs font-bold px-4 py-1 rounded-full">
+            MOST POPULAR
+          </span>
+
+          <h3 class="text-2xl font-bold">Student Pro</h3>
+
+          <p class="text-slate-400 mt-2">Unlock your potential.</p>
+
+          <p class="text-4xl font-bold mt-7">₹299<span class="text-sm text-slate-500"> / month</span></p>
+
+          <ul class="space-y-4 mt-8 text-slate-300">
+            <li>✓ All Courses</li>
+            <li>✓ AI Learning Assistant</li>
+            <li>✓ Certificates</li>
+            <li>✓ Real Projects</li>
+          </ul>
+
+          <button onclick="selectPlan('Student Pro')" class="btn-glow w-full rounded-xl py-3 mt-8 bg-gradient-to-r from-cyan to-electric text-black font-bold">
+            Choose Student Pro
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="glass rounded-3xl p-8">
+        <h3 class="text-2xl font-bold">Professional</h3>
+        <p class="text-slate-400 mt-2">For serious career growth.</p>
+        <p class="text-4xl font-bold mt-7">₹799<span class="text-sm text-slate-500"> / month</span></p>
+
+        <ul class="space-y-4 mt-8 text-slate-300">
+          <li>✓ Everything in Student Pro</li>
+          <li>✓ Advanced AI</li>
+          <li>✓ Career Guidance</li>
+          <li>✓ Priority Support</li>
+        </ul>
+
+        <button onclick="selectPlan('Professional')" class="w-full glass rounded-xl py-3 mt-8">
+          Choose Professional
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="py-28">
+
+  <div class="max-w-7xl mx-auto px-6 text-center">
+
+    <p class="text-cyan text-xs tracking-[.25em]">ABOUT EDUTECH AI</p>
+
+    <h2 class="font-heading text-5xl font-extrabold mt-4">
+      Learn. Build. <span class="gradient-text">Grow.</span>
+    </h2>
+
+    <p class="max-w-3xl mx-auto text-slate-400 leading-relaxed mt-6">
+      EduTech AI is focused on making high-quality technology education accessible
+      to everyone through modern learning experiences and intelligent AI guidance.
+    </p>
+
+
+    <div class="grid md:grid-cols-3 gap-6 mt-14">
+
+      <div class="glass rounded-3xl p-8">
+        <i data-lucide="book-open" class="text-cyan mx-auto"></i>
+        <h3 class="font-bold text-xl mt-5">Learn</h3>
+        <p class="text-slate-400 mt-3">Learn modern skills from structured courses.</p>
+      </div>
+
+      <div class="glass rounded-3xl p-8">
+        <i data-lucide="code-2" class="text-electric mx-auto"></i>
+        <h3 class="font-bold text-xl mt-5">Build</h3>
+        <p class="text-slate-400 mt-3">Build projects that demonstrate real skills.</p>
+      </div>
+
+      <div class="glass rounded-3xl p-8">
+        <i data-lucide="trending-up" class="text-violet mx-auto"></i>
+        <h3 class="font-bold text-xl mt-5">Grow</h3>
+        <p class="text-slate-400 mt-3">Grow your skills and create better opportunities.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+```
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer class="border-t border-white/10 pt-16 pb-8">
+
+```
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+
+  <div>
+
+    <h2 class="font-heading font-extrabold text-2xl">
+      EduTech <span class="gradient-text">AI</span>
+    </h2>
+
+    <p class="text-slate-500 text-sm leading-relaxed mt-4">
+      Building the future of technology education with AI-powered learning.
+    </p>
+
+  </div>
+
+
+  <div>
+    <h4 class="font-bold">Product</h4>
+    <div class="space-y-3 mt-4 text-sm text-slate-500">
+      <a href="#courses" class="block">Courses</a>
+      <a href="#learning" class="block">My Learning</a>
+      <a href="#pricing" class="block">Pricing</a>
+    </div>
+  </div>
+
+
+  <div>
+    <h4 class="font-bold">Company</h4>
+    <div class="space-y-3 mt-4 text-sm text-slate-500">
+      <a href="#about" class="block">About Us</a>
+      <a href="#" class="block">Careers</a>
+      <a href="#" class="block">Contact</a>
+    </div>
+  </div>
+
+
+  <div>
+
+    <h4 class="font-bold">Stay Updated</h4>
+
+    <form id="newsletterForm" class="flex gap-2 mt-4">
+
+      <input
+        id="newsletterEmail"
+        type="email"
+        placeholder="Your email"
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none"
+        required
+      >
+
+      <button class="px-4 rounded-xl bg-cyan text-black font-bold">
+        Join
+      </button>
+
+    </form>
+
+    <div class="flex gap-4 mt-6 text-slate-400">
+      <i data-lucide="github" class="w-5 cursor-pointer hover:text-cyan"></i>
+      <i data-lucide="linkedin" class="w-5 cursor-pointer hover:text-cyan"></i>
+      <i data-lucide="instagram" class="w-5 cursor-pointer hover:text-cyan"></i>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="max-w-7xl mx-auto px-6 mt-14 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between gap-4 text-xs text-slate-600">
+
+  <p>© 2026 EduTech AI. All rights reserved.</p>
+
+  <p>Built for Innovation & Learning ✦</p>
+
+</div>
+```
+
+  </footer>
+
+  <!-- AUTH MODAL -->
+
+  <div id="authModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+
+```
+<div class="glass rounded-3xl w-full max-w-md p-7 relative">
+
+  <button id="closeAuth" class="absolute right-5 top-5 text-slate-400 hover:text-white">
+    <i data-lucide="x"></i>
+  </button>
+
+
+  <div id="loginView">
+
+    <p class="text-cyan text-xs tracking-[.2em]">WELCOME BACK</p>
+
+    <h2 class="font-heading text-3xl font-bold mt-3">
+      Continue Learning
+    </h2>
+
+    <form id="loginForm" class="space-y-4 mt-7">
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Email address"
+        required
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan"
+      >
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Password"
+        required
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan"
+      >
+
+      <button class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan to-electric text-black font-bold">
+        Log In
+      </button>
+
+    </form>
+
+    <div class="flex justify-between text-sm mt-5">
+      <button id="showSignup" class="text-cyan">Create account</button>
+      <button id="showForgot" class="text-slate-400">Forgot password?</button>
+    </div>
+
+  </div>
+
+
+  <div id="signupView" class="hidden">
+
+    <p class="text-cyan text-xs tracking-[.2em]">JOIN THE FUTURE</p>
+
+    <h2 class="font-heading text-3xl font-bold mt-3">
+      Create Account
+    </h2>
+
+    <form id="signupForm" class="space-y-4 mt-7">
+
+      <input
+        id="signupName"
+        placeholder="Your name"
+        required
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
+      >
+
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="Email address"
+        required
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
+      >
+
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="Password"
+        required
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
+      >
+
+      <button class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan to-violet text-black font-bold">
+        Create Account
+      </button>
+
+    </form>
+
+    <button id="backLogin1" class="text-cyan text-sm mt-5">
+      ← Back to login
+    </button>
+
+  </div>
+
+
+  <div id="forgotView" class="hidden">
+
+    <p class="text-cyan text-xs tracking-[.2em]">RESET PASSWORD</p>
+
+    <h2 class="font-heading text-3xl font-bold mt-3">
+      Forgot Password?
+    </h2>
+
+    <form id="forgotForm" class="space-y-4 mt-7">
+
+      <input
+        id="forgotEmail"
+        type="email"
+        placeholder="Your email address"
+        required
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none"
+      >
+
+      <button class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan to-electric text-black font-bold">
+        Send Reset Link
+      </button>
+
+    </form>
+
+    <button id="backLogin2" class="text-cyan text-sm mt-5">
+      ← Back to login
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- COURSE MODAL -->
+
+  <div id="courseModal" class="modal fixed inset-0 z-50 bg-black/80 backdrop-blur-sm p-4 items-center justify-center">
+
+```
+<div class="glass w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 relative">
+
+  <button id="closeCourse" class="absolute top-5 right-5 z-10">
+    <i data-lucide="x"></i>
+  </button>
+
+  <div id="courseModalContent"></div>
+
+</div>
+```
+
+  </div>
+
+  <!-- TOAST -->
+
+  <div id="toast" class="toast fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] glass px-6 py-4 rounded-xl flex items-center gap-3 shadow-2xl">
+    <i data-lucide="sparkles" class="text-cyan"></i>
+    <span id="toastText">Success!</span>
+  </div>
+
+  <script>
+
+    const courses = [
+      {
+        id: 1,
+        title: "Complete Full Stack Web Development",
+        category: "Web Development",
+        badge: "Bestseller",
+        instructor: "Alex Morgan",
+        rating: 4.9,
+        students: "12,540",
+        lessons: 48,
+        duration: "24 Hours",
+        price: 1499,
+        description: "Build modern responsive websites and full stack applications from scratch.",
+        gradient: "from-cyan/80 via-blue-500 to-violet"
+      },
+      {
+        id: 2,
+        title: "Python Programming From Zero",
+        category: "Data Science",
+        badge: "Free",
+        instructor: "Sarah Johnson",
+        rating: 4.8,
+        students: "9,200",
+        lessons: 32,
+        duration: "16 Hours",
+        price: 0,
+        description: "Learn Python fundamentals and start your programming journey.",
+        gradient: "from-emerald-400 via-cyan to-blue-600"
+      },
+      {
+        id: 3,
+        title: "Artificial Intelligence Masterclass",
+        category: "AI / ML",
+        badge: "New",
+        instructor: "Dr. Ryan Chen",
+        rating: 4.9,
+        students: "6,840",
+        lessons: 40,
+        duration: "20 Hours",
+        price: 999,
+        description: "Understand modern AI, machine learning and practical applications.",
+        gradient: "from-violet via-fuchsia-500 to-cyan"
+      },
+      {
+        id: 4,
+        title: "Ethical Cyber Security",
+        category: "Cyber Security",
+        badge: "Bestseller",
+        instructor: "David Miller",
+        rating: 4.7,
+        students: "8,100",
+        lessons: 38,
+        duration: "19 Hours",
+        price: 1499,
+        description: "Learn cybersecurity concepts, defense strategies and ethical security practices.",
+        gradient: "from-red-500 via-orange-500 to-yellow-400"
+      },
+      {
+        id: 5,
+        title: "UI UX Design Fundamentals",
+        category: "Design",
+        badge: "New",
+        instructor: "Emma Davis",
+        rating: 4.8,
+        students: "7,450",
+        lessons: 28,
+        duration: "14 Hours",
+        price: 499,
+        description: "Create modern user experiences and beautiful interface designs.",
+        gradient: "from-pink-500 via-violet to-blue-500"
+      },
+      {
+        id: 6,
+        title: "JavaScript Modern Mastery",
+        category: "Web Development",
+        badge: "Bestseller",
+        instructor: "Michael Lee",
+        rating: 4.9,
+        students: "15,300",
+        lessons: 44,
+        duration: "22 Hours",
+        price: 999,
+        description: "Master modern JavaScript, DOM, ES6+ and interactive web development.",
+        gradient: "from-yellow-300 via-orange-400 to-red-500"
+      },
+      {
+        id: 7,
+        title: "Data Science Essentials",
+        category: "Data Science",
+        badge: "Free",
+        instructor: "Nina Patel",
+        rating: 4.7,
+        students: "5,900",
+        lessons: 30,
+        duration: "15 Hours",
+        price: 0,
+        description: "Understand data, analysis and the foundations of data science.",
+        gradient: "from-blue-500 via-cyan to-emerald-400"
+      },
+      {
+        id: 8,
+        title: "Machine Learning Projects",
+        category: "AI / ML",
+        badge: "New",
+        instructor: "Kevin Roberts",
+        rating: 4.8,
+        students: "4,620",
+        lessons: 36,
+        duration: "18 Hours",
+        price: 1499,
+        description: "Build practical machine learning projects and understand real-world workflows.",
+        gradient: "from-indigo-600 via-violet to-pink-500"
+      }
+    ];
+
+
+    const courseGrid = document.getElementById("courseGrid");
+
+
+    function renderCourses(courseList = courses) {
+
+      courseGrid.innerHTML = "";
+
+      courseList.forEach(course => {
+
+        courseGrid.innerHTML += `
+          <article class="course-card glass rounded-2xl overflow-hidden">
+
+            <div class="h-40 bg-gradient-to-br ${course.gradient} relative p-4 flex items-end">
+
+              <span class="absolute top-4 left-4 text-xs bg-black/30 backdrop-blur px-3 py-1 rounded-full">
+                ${course.badge}
+              </span>
+
+              <div class="w-12 h-12 rounded-xl bg-black/20 backdrop-blur flex items-center justify-center">
+                <i data-lucide="play"></i>
+              </div>
+
+            </div>
+
+
+            <div class="p-5">
+
+              <p class="text-xs text-cyan">${course.category}</p>
+
+              <h3 class="font-bold mt-2 min-h-[48px]">
+                ${course.title}
+              </h3>
+
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">
+                ${course.description}
+              </p>
+
+              <p class="text-xs text-slate-500 mt-4">
+                ${course.instructor}
+              </p>
+
+              <div class="flex justify-between text-xs mt-4">
+                <span class="text-yellow-400">★ ${course.rating}</span>
+                <span class="text-slate-500">${course.students} students</span>
+              </div>
+
+              <div class="flex justify-between items-center mt-5 pt-4 border-t border-white/10">
+
+                <span class="font-bold ${course.price === 0 ? 'text-emerald-400' : 'text-white'}">
+                  ${course.price === 0 ? 'FREE' : '₹' + course.price}
+                </span>
+
+                <button onclick="openCourse(${course.id})" class="text-xs text-cyan hover:text-white">
+                  View Course →
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+        `;
+      });
+
+      lucide.createIcons();
+    }
+
+
+    renderCourses();
+
+
+    document.querySelectorAll(".filter-btn").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+          btn.classList.remove("bg-cyan", "text-black", "font-bold");
+        });
+
+        button.classList.add("bg-cyan", "text-black", "font-bold");
+
+        const filter = button.dataset.filter;
+
+        if (filter === "All") {
+          renderCourses(courses);
+        } else {
+          renderCourses(
+            courses.filter(course => course.category === filter)
+          );
+        }
+
+      });
+
+    });
+
+
+    document.getElementById("searchInput").addEventListener("input", function() {
+
+      const query = this.value.toLowerCase();
+
+      const results = courses.filter(course =>
+        course.title.toLowerCase().includes(query) ||
+        course.category.toLowerCase().includes(query)
+      );
+
+      renderCourses(results);
+
+      if (query.length > 0) {
+        document.querySelector("#courses").scrollIntoView({ behavior: "smooth" });
+      }
+
+    });
+
+
+    const courseModal = document.getElementById("courseModal");
+    const courseModalContent = document.getElementById("courseModalContent");
+
+
+    function getCourseProgress(courseId) {
+
+      const lessons = JSON.parse(
+        localStorage.getItem("courseProgress_" + courseId) || "[]"
+      );
+
+      return Math.round((lessons.length / 6) * 100);
+    }
+
+
+    function openCourse(id) {
+
+      const course = courses.find(c => c.id === id);
+
+      const completedLessons = JSON.parse(
+        localStorage.getItem("courseProgress_" + id) || "[]"
+      );
+
+
+      const lessonNames = [
+        "Welcome to the Course",
+        "Course Roadmap",
+        "Core Concepts",
+        "Hands-On Practice",
+        "Real World Project",
+        "Final Assessment"
+      ];
+
+
+      const lessonsHTML = lessonNames.map((lesson, index) => {
+
+        const checked = completedLessons.includes(index) ? "checked" : "";
+
+        return `
+          <label class="flex items-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer">
+            <input
+              type="checkbox"
+              ${checked}
+              onchange="toggleLesson(${id}, ${index})"
+              class="w-4 h-4 accent-cyan"
+            >
+
+            <span class="text-sm">${lesson}</span>
+
+          </label>
+        `;
+
+      }).join("");
+
+
+      courseModalContent.innerHTML = `
+
+        <div class="h-64 rounded-2xl bg-gradient-to-br ${course.gradient} flex items-center justify-center relative overflow-hidden">
+
+          <button class="w-20 h-20 rounded-full bg-black/30 backdrop-blur border border-white/30 flex items-center justify-center hover:scale-110 transition">
+            <i data-lucide="play" class="w-8 h-8"></i>
+          </button>
+
+          <p class="absolute bottom-5 left-6 font-bold">
+            ${course.title}
+          </p>
+
+        </div>
+
+
+        <div class="grid lg:grid-cols-[1fr_280px] gap-8 mt-8">
+
+          <div>
+
+            <p class="text-cyan text-sm">${course.category}</p>
+
+            <h2 class="font-heading text-3xl font-bold mt-2">
+              ${course.title}
+            </h2>
+
+            <p class="text-slate-400 mt-4 leading-relaxed">
+              ${course.description}
+            </p>
+
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 text-sm">
+
+              <div class="glass rounded-xl p-3">
+                ⭐ ${course.rating}
+              </div>
+
+              <div class="glass rounded-xl p-3">
+                ${course.students} students
+              </div>
+
+              <div class="glass rounded-xl p-3">
+                ${course.duration}
+              </div>
+
+              <div class="glass rounded-xl p-3">
+                ${course.lessons} lessons
+              </div>
+
+            </div>
+
+
+            <h3 class="font-bold text-xl mt-8">
+              Course Syllabus
+            </h3>
+
+            <div class="space-y-3 mt-4">
+
+              <p class="text-sm text-slate-500">MODULE 1 — INTRODUCTION</p>
+
+              ${lessonsHTML}
+
+            </div>
+
+          </div>
+
+
+          <aside class="glass rounded-2xl p-5 h-fit">
+
+            <p class="text-slate-400 text-sm">INSTRUCTOR</p>
+
+            <h3 class="font-bold mt-2">
+              ${course.instructor}
+            </h3>
+
+
+            <div class="mt-6">
+
+              <p class="text-sm text-slate-400">COURSE PROGRESS</p>
+
+              <div class="h-2 bg-white/10 rounded-full mt-3 overflow-hidden">
+
+                <div
+                  id="modalProgressBar"
+                  class="h-full bg-gradient-to-r from-cyan to-violet"
+                  style="width:${getCourseProgress(id)}%"
+                ></div>
+
+              </div>
+
+              <p id="modalProgressText" class="text-cyan text-sm mt-2">
+                ${getCourseProgress(id)}% Complete
+              </p>
+
+            </div>
+
+
+            <div class="mt-7 space-y-3">
+
+              <button onclick="downloadNotes('${course.title}')" class="w-full py-3 glass rounded-xl text-sm">
+                Download Notes
+              </button>
+
+              <button onclick="downloadNotes('${course.title} PDF Notes')" class="w-full py-3 bg-gradient-to-r from-cyan to-electric text-black font-bold rounded-xl text-sm">
+                Download PDF
+              </button>
+
+            </div>
+
+          </aside>
+
+        </div>
+      `;
+
+
+      courseModal.classList.add("active");
+
+      lucide.createIcons();
+
+    }
+
+
+    function toggleLesson(courseId, lessonIndex) {
+
+      let completed = JSON.parse(
+        localStorage.getItem("courseProgress_" + courseId) || "[]"
+      );
+
+
+      if (completed.includes(lessonIndex)) {
+
+        completed = completed.filter(id => id !== lessonIndex);
+
+      } else {
+
+        completed.push(lessonIndex);
+
+      }
+
+
+      localStorage.setItem(
+        "courseProgress_" + courseId,
+        JSON.stringify(completed)
+      );
+
+
+      const progress = getCourseProgress(courseId);
+
+      document.getElementById("modalProgressBar").style.width = progress + "%";
+
+      document.getElementById("modalProgressText").textContent =
+        progress + "% Complete";
+
+
+      renderActiveCourses();
+
+    }
+
+
+    function downloadNotes(title) {
+
+      const content = `
+EduTech AI Learning Notes
+
+Course:
+${title}
+
+Thank you for learning with EduTech AI.
+
+Key Topics:
+- Introduction
+- Core Concepts
+- Practice
+- Real World Project
+- Final Assessment
+      `;
+
+
+      const blob = new Blob([content], { type: "text/plain" });
+
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+
+      a.href = url;
+
+      a.download = "EduTech-AI-Notes.txt";
+
+      a.click();
+
+      URL.revokeObjectURL(url);
+
+      showToast("Your learning notes are ready!");
+
+    }
+
+
+    document.getElementById("closeCourse").onclick = () => {
+      courseModal.classList.remove("active");
+    };
+
+
+    // ACTIVE COURSES
+
+    function renderActiveCourses() {
+
+      const container = document.getElementById("activeCourses");
+
+      const active = courses.slice(0, 3);
+
+      container.innerHTML = active.map(course => {
+
+        const progress = getCourseProgress(course.id);
+
+        return `
+
+          <div class="p-4 bg-white/5 rounded-2xl flex gap-4 items-center">
+
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${course.gradient}"></div>
+
+            <div class="flex-1">
+
+              <div class="flex justify-between gap-4">
+
+                <h4 class="font-semibold text-sm">
+                  ${course.title}
+                </h4>
+
+                <span class="text-cyan text-xs">
+                  ${progress}%
+                </span>
+
+              </div>
+
+              <div class="h-2 bg-white/10 rounded-full mt-3 overflow-hidden">
+
+                <div
+                  class="h-full bg-gradient-to-r from-cyan to-violet"
+                  style="width:${progress}%"
+                ></div>
+
+              </div>
+
+            </div>
+
+            <button onclick="openCourse(${course.id})" class="hidden sm:block text-xs text-cyan">
+              Continue
+            </button>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+    }
+
+
+    renderActiveCourses();
+
+
+    // AUTH SYSTEM
+
+    const authModal = document.getElementById("authModal");
+
+
+    function openAuth() {
+
+      authModal.classList.add("active");
+
+    }
+
+
+    function closeAuth() {
+
+      authModal.classList.remove("active");
+
+    }
+
+
+    document.getElementById("loginBtn").onclick = openAuth;
+
+    document.getElementById("mobileLoginBtn").onclick = openAuth;
+
+    document.getElementById("trialBtn").onclick = openAuth;
+
+    document.getElementById("startBtn").onclick = openAuth;
+
+    document.getElementById("closeAuth").onclick = closeAuth;
+
+
+    function showAuthView(view) {
+
+      document.getElementById("loginView").classList.add("hidden");
+
+      document.getElementById("signupView").classList.add("hidden");
+
+      document.getElementById("forgotView").classList.add("hidden");
+
+      document.getElementById(view).classList.remove("hidden");
+
+    }
+
+
+    document.getElementById("showSignup").onclick = () =>
+      showAuthView("signupView");
+
+    document.getElementById("showForgot").onclick = () =>
+      showAuthView("forgotView");
+
+    document.getElementById("backLogin1").onclick = () =>
+      showAuthView("loginView");
+
+    document.getElementById("backLogin2").onclick = () =>
+      showAuthView("loginView");
+
+
+    function loginUser(name, email) {
+
+      const user = {
+        name,
+        email,
+        loggedIn: true
+      };
+
+      localStorage.setItem("edutechUser", JSON.stringify(user));
+
+      updateUserUI();
+
+      closeAuth();
+
+      showToast(`Welcome, ${name}! 🚀`);
+
+    }
+
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value;
+
+      const savedUser = JSON.parse(
+        localStorage.getItem("edutechRegisteredUser") || "null"
+      );
+
+
+      const name =
+        savedUser && savedUser.email === email
+          ? savedUser.name
+          : "Learner";
+
+
+      loginUser(name, email);
+
+    });
+
+
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+
+      e.preventDefault();
+
+      const name = document.getElementById("signupName").value;
+
+      const email = document.getElementById("signupEmail").value;
+
+      const password = document.getElementById("signupPassword").value;
+
+
+      localStorage.setItem(
+        "edutechRegisteredUser",
+        JSON.stringify({
+          name,
+          email,
+          password
+        })
+      );
+
+
+      loginUser(name, email);
+
+    });
+
+
+    document.getElementById("forgotForm").addEventListener("submit", function(e) {
+
+      e.preventDefault();
+
+      closeAuth();
+
+      showToast("Demo reset link request sent! ✉️");
+
+    });
+
+
+    function updateUserUI() {
+
+      const user = JSON.parse(
+        localStorage.getItem("edutechUser") || "null"
+      );
+
+
+      const loginBtn = document.getElementById("loginBtn");
+
+      const startBtn = document.getElementById("startBtn");
+
+      const profileArea = document.getElementById("profileArea");
+
+
+      if (user && user.loggedIn) {
+
+        loginBtn.classList.add("hidden");
+
+        startBtn.classList.add("hidden");
+
+        profileArea.classList.remove("hidden");
+
+        document.getElementById("profileBtn").textContent =
+          user.name.charAt(0).toUpperCase();
+
+        document.getElementById("learnerName").textContent =
+          user.name;
+
+      } else {
+
+        loginBtn.classList.remove("hidden");
+
+        startBtn.classList.remove("hidden");
+
+        profileArea.classList.add("hidden");
+
+        document.getElementById("learnerName").textContent =
+          "Learner";
+
+      }
+
+    }
+
+
+    updateUserUI();
+
+
+    document.getElementById("profileBtn").onclick = () => {
+
+      document.getElementById("profileMenu").classList.toggle("hidden");
+
+    };
+
+
+    document.getElementById("logoutBtn").onclick = () => {
+
+      localStorage.removeItem("edutechUser");
+
+      updateUserUI();
+
+      document.getElementById("profileMenu").classList.add("hidden");
+
+      showToast("You have been logged out.");
+
+    };
+
+
+    // AI CHAT
+
+    document.getElementById("chatForm").addEventListener("submit", function(e) {
+
+      e.preventDefault();
+
+      const input = document.getElementById("chatInput");
+
+      const message = input.value.trim();
+
+      if (!message) return;
+
+
+      const messages = document.getElementById("chatMessages");
+
+
+      messages.innerHTML += `
+        <div class="ml-auto max-w-[85%] bg-gradient-to-r from-cyan to-electric text-black p-4 rounded-2xl text-sm">
+          ${escapeHTML(message)}
+        </div>
+      `;
+
+
+      input.value = "";
+
+
+      messages.innerHTML += `
+        <div id="typingMessage" class="max-w-[85%] bg-white/5 p-4 rounded-2xl text-sm text-slate-400">
+          EduTech AI is thinking...
+        </div>
+      `;
+
+
+      messages.scrollTop = messages.scrollHeight;
+
+
+      setTimeout(() => {
+
+        document.getElementById("typingMessage")?.remove();
+
+        const response = getAIResponse(message);
+
+        messages.innerHTML += `
+          <div class="max-w-[85%] bg-white/5 p-4 rounded-2xl text-sm text-slate-300 leading-relaxed">
+            ${response}
+          </div>
+        `;
+
+        messages.scrollTop = messages.scrollHeight;
+
+      }, 900);
+
+    });
+
+
+    function getAIResponse(question) {
+
+      const q = question.toLowerCase();
+
+
+      if (q.includes("javascript") || q.includes("function")) {
+
+        return "A JavaScript function is a reusable block of code designed to perform a specific task. Functions help you organize code and avoid repeating the same logic.";
+
+      }
+
+
+      if (q.includes("python")) {
+
+        return "Python is a beginner-friendly programming language used for web development, automation, data science and artificial intelligence. Start with variables, conditions, loops and functions.";
+
+      }
+
+
+      if (q.includes("ai") || q.includes("artificial intelligence")) {
+
+        return "Artificial Intelligence focuses on building systems that can perform tasks associated with human intelligence, such as recognizing patterns, learning from data and making predictions.";
+
+      }
+
+
+      return "Great question! A good learning approach is to first understand the core concept, then study a simple example, practice it yourself and finally build a small project. Keep learning step by step! 🚀";
+
+    }
+
+
+    function escapeHTML(text) {
+
+      const div = document.createElement("div");
+
+      div.textContent = text;
+
+      return div.innerHTML;
+
+    }
+
+
+    // MOBILE NAV
+
+    document.getElementById("mobileMenuBtn").onclick = () => {
+
+      document.getElementById("mobileNav").classList.toggle("active");
+
+    };
+
+
+    // NEWSLETTER
+
+    document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+
+      e.preventDefault();
+
+      const email = document.getElementById("newsletterEmail").value;
+
+      if (email) {
+
+        localStorage.setItem("newsletterEmail", email);
+
+        document.getElementById("newsletterEmail").value = "";
+
+        showToast("You're subscribed to EduTech AI updates! 🎉");
+
+      }
+
+    });
+
+
+    // PLAN
+
+    function selectPlan(plan) {
+
+      showToast(`${plan} plan selected! Demo confirmation complete. 🚀`);
+
+    }
+
+
+    // TOAST
+
+    function showToast(message) {
+
+      const toast = document.getElementById("toast");
+
+      document.getElementById("toastText").textContent = message;
+
+      toast.classList.add("show");
+
+
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 3000);
+
+    }
+
+
+    // CLOSE MODALS ON OUTSIDE CLICK
+
+    authModal.addEventListener("click", e => {
+
+      if (e.target === authModal) closeAuth();
+
+    });
+
+
+    courseModal.addEventListener("click", e => {
+
+      if (e.target === courseModal) {
+        courseModal.classList.remove("active");
+      }
+
+    });
+
+
+    lucide.createIcons();
+
+  </script>
+
+</body>
+</html>
